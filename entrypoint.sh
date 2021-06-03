@@ -2,15 +2,19 @@
 
 set -e
 
-sh -c "/init-git-ssh.sh $*"
+sh -c "/init-git.sh $*"
 
-SOURCE_REPO=$1
-DESTINATION_REPO=$2
+DESTINATION=$1
 
-echo "SOURCE=$SOURCE_REPO"
-echo "DESTINATION=$DESTINATION_REPO"
+REPOSITORY="$(basename "$GITHUB_REPOSITORY")"
 
-git clone --mirror "$SOURCE_REPO" && cd "$(basename "$SOURCE_REPO")"
+SOURCE_REPO="git@github.com:$GITHUB_REPOSITORY"
+DESTINATION_REPO="git@$DESTINATION.com:$GITHUB_ACTOR/$REPOSITORY"
+
+echo "SOURCE_REPO: $SOURCE_REPO"
+echo "DESTINATION_REPO: $DESTINATION_REPO"
+
+git clone --mirror "$SOURCE_REPO" && cd "$REPOSITORY"
 git remote set-url --push origin "$DESTINATION_REPO"
 
 git fetch -p origin
