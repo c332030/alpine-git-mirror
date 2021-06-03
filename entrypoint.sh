@@ -8,13 +8,19 @@ DESTINATION=$1
 
 REPOSITORY="$(basename "$GITHUB_REPOSITORY")"
 
-SOURCE_REPO="git@github.com:$GITHUB_REPOSITORY"
-DESTINATION_REPO="git@$DESTINATION.com:$GITHUB_ACTOR/$REPOSITORY"
+echo "REPOSITORY: $REPOSITORY"
+
+SOURCE_REPO="git@github.com:$GITHUB_REPOSITORY.git"
+DESTINATION_REPO="git@$DESTINATION.com:$GITHUB_ACTOR/$REPOSITORY.git"
 
 echo "SOURCE_REPO: $SOURCE_REPO"
 echo "DESTINATION_REPO: $DESTINATION_REPO"
 
-git clone --mirror "$SOURCE_REPO" && cd "$REPOSITORY"
+git clone --mirror "$SOURCE_REPO"
+
+ls -alh
+
+cd "$REPOSITORY"
 git remote set-url --push origin "$DESTINATION_REPO"
 
 git fetch -p origin
