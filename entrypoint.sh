@@ -7,5 +7,5 @@ sh -c "/mirror.sh $*"
 
 if [ -n "$COMMAND" ]
 then
-  ${COMMAND} || true
+  sh -c "${COMMAND}" || true
 fi
