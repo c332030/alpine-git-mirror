@@ -7,5 +7,6 @@ sh -c "/mirror.sh $*"
 
 if [ -n "$COMMAND" ]
 then
+  echo execute command
   sh -c "${COMMAND}" || true
 fi
