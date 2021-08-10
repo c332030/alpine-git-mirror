@@ -10,7 +10,7 @@ DESTINATION_REPO="git@$DESTINATION.com:$GITHUB_ACTOR/$REPOSITORY.git"
 echo "SOURCE_REPO: $SOURCE_REPO"
 echo "DESTINATION_REPO: $DESTINATION_REPO"
 
-git clone --mirror "$SOURCE_REPO" && cd "${REPOSITORY}.git"
+git clone --mirror "$SOURCE_REPO" source && cd source || exit
 git remote set-url --push origin "$DESTINATION_REPO"
 
 git fetch -p origin
