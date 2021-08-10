@@ -10,7 +10,7 @@ DESTINATION_REPO=$2
 echo "SOURCE=$SOURCE_REPO"
 echo "DESTINATION=$DESTINATION_REPO"
 
-git clone --mirror "$SOURCE_REPO" && cd "$(basename "$SOURCE_REPO")"
+git clone --mirror "$SOURCE_REPO" source && cd source
 git remote set-url --push origin "$DESTINATION_REPO"
 
 git fetch -p origin
